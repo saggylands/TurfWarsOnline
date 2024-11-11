@@ -1,0 +1,42 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc32:version{c5dcef98-b629-46ab-88e3-a17c005c935e} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					
+					{
+						_class = "RenderMeshFile"
+						filename = "weapons/models/ak47/weapon_rif_ak47_body_legacy.dmx"
+					},
+					
+					{
+						_class = "RenderMeshFile"
+						filename = "weapons/models/ak47/weapon_rif_ak47_body_hd1.dmx"
+					},
+				]
+			},
+			
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					
+					{
+						_class = "PhysicsHullFile"
+						filename = "weapons/models/ak47/weapon_rif_ak47_hull.dmx"
+						surface_prop = "756963221"
+						collision_tags = ""
+						name = ""
+					},
+				]
+			},
+		]
+	}
+}

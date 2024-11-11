@@ -1,0 +1,43 @@
+﻿@using System.Threading.Tasks;
+@using System.Collections.Generic;
+@using System.ComponentModel.DataAnnotations
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel;
+
+<root class="spawnpage columned">
+
+	<div class="nav">
+
+		<div class="section">
+
+		</div>
+
+		<div class="section grow">
+			<button @onclick="@Pistol1">Pistol x1</button>
+		</div>
+
+		<div class="section">
+
+		</div>
+
+	</div>
+
+	<div class="contents">
+
+
+
+	</div>
+
+</root>
+
+
+@code
+{
+
+	void Pistol1()
+	{
+		ConsoleSystem.Run("spawn", "models/citizen_props/crate01.vmdl");
+
+	}
+}

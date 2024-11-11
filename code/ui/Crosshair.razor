@@ -1,0 +1,38 @@
+﻿@using Sandbox.UI;
+@using Sandbox;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.IO;  
+@inherits Panel;
+
+<root style="width: @CrosshairStuff.FloatValue;height: @CrosshairStuff.FloatValue; background-color:hsl(@CrosshairStuff.FloatHue, @CrosshairStuff.FloatSaturation, @CrosshairStuff.FloatLightness); border-radius: @CrosshairStuff.FloatRadius;">
+
+
+
+</root>
+<style>
+
+crosshair
+{
+	position: absolute;
+	z-index: -1;
+	align-items: flex-end;
+	mix-blend-mode: lighten;
+	width: 5px;
+	height: 5px;
+	top: 50%;
+	left: 50%;
+	border-radius: 100px;
+	transform: translate( -50% -50% );
+}
+
+</style>
+@code {
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(CrosshairStuff.FloatValue,CrosshairStuff.FloatHue, CrosshairStuff.FloatSaturation, CrosshairStuff.FloatLightness, CrosshairStuff.FloatRadius);
+	}
+	
+}

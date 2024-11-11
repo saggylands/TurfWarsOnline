@@ -1,0 +1,79 @@
+@using Sandbox.UI;
+@using Sandbox;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+
+@namespace Sandbox
+
+<root>
+    @if (isMOTDVisible)
+    {
+	<WebPanel @ref="MyWebPanel"></WebPanel>
+
+    <button @onclick="@Close">Close</button>
+	}
+</root>
+
+<style>
+	button {
+	background: rgb(207, 30, 30);
+
+	text-shadow: 2px 2px 2px black;
+	top: 5.2%;
+	left: 58.8%;
+	border: none;
+	height: 52px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: poppins;
+	font-size: 16px;
+	cursor: grab;
+	pointer-events: all;
+	}
+	.button:hover {
+  		background-color: rgb(118, 0, 0); /* Green */
+		
+		cursor: pointer;
+}
+	WebPanel {
+		background-color: white;
+		top: 10%;
+		left: 72%;
+		width: 720px;
+		height: 720px;
+		pointer-events: all;
+	}
+</style>
+
+@code {
+	public static bool isMOTDVisible = true;
+	public void Close()
+	{
+		isMOTDVisible = false;
+	}
+	private WebPanel MyWebPanel { get; set; }
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender(firstTime);
+
+		if (firstTime)
+		{
+			
+			MyWebPanel.Surface.Url = "https://bigmark824.github.io/Marks-MOTD/";
+            
+		}
+	}
+	[ConCmd.Client( "motd" )]
+	public static void motd()
+	{
+		isMOTDVisible = true;
+		Log.Info("Okay!");
+		// 23/08/2023
+	}
+	
+}

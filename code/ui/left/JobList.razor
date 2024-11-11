@@ -1,0 +1,143 @@
+﻿@using System.Threading.Tasks;
+@using System.Threading;
+@using System.Collections.Generic;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel;
+<root class="spawnpage columned">
+	
+	<div class="nav">
+
+		<div class="section">
+
+		</div>
+
+		<div class="section grow">
+		</div>
+
+		<div class="section grow">
+			<b>Civilians</b>
+			<button @onclick="@Citizen">Citizen</button>
+			<button @onclick="@GunDealer">Gun Dealer</button>
+			<button @onclick="@Hobo">Hobo</button>
+			</div>
+		<div class="section grow">
+			
+			<b>Criminals</b>
+			<button @onclick="@Thief">Thief</button>
+			<button @onclick="@Hitman">Hitman</button>
+			<button @onclick="@GangLeader">Gang Leader</button>
+		</div>
+		<div class="section grow">
+			
+			<b>Civil Protection</b>
+			<button @onclick="@Police">Police Officer</button>
+		</div>
+	</div>
+
+	<div class="contents">
+
+
+
+	</div>
+
+</root>
+
+
+@code
+{
+
+		[ConCmd.Server( "suicide" )]
+	static void DoPlayerSuicide()
+	{
+		if ( ConsoleSystem.Caller.Pawn is SandboxPlayer basePlayer )
+		{
+			basePlayer.TakeDamage( new DamageInfo { Damage = basePlayer.Health * 99 } );
+		}
+	}
+		[ConCmd.Server( "removecontra" )]
+	public static void removecontra()
+	{
+		var player = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+		player.Inventory.DeleteContents();
+	}
+		[ConCmd.Server( "citizen" )]
+	public static void citizen()
+	{
+		
+		var player = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+
+		player.Inventory.Add( new PhysGun(), true );
+		player.Inventory.Add( new GravGun() );
+		player.Inventory.Add( new Tool() );
+		player.Inventory.Add( new Flashlight() );
+		player.Inventory.Add( new Fists() );
+
+	}
+	[ConCmd.Server( "gang" )]
+	public static void gang()
+	{
+		var player = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+
+		player.Inventory.Add( new MP5(), true  );
+	}
+	[ConCmd.Server( "policeofficer" )]
+	public static void police()
+	{
+		var player = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+
+		player.Inventory.Add( new Pistol(), true  );
+		
+		
+		//player.Inventory.Add( new ArrestBaton(), true  );
+	}
+	void Thief()
+	{
+		
+		JobUI.Job = "Thief";
+		ConsoleSystem.Run( "ServerSetJob 1  "  );
+	}
+	void Citizen()
+	{
+		ConsoleSystem.Run( "ServerSetJob 0  "  );
+		removecontra();
+		JobUI.Job = "Citizen";
+		citizen();
+	}
+	void GunDealer()
+	{
+		JobUI.Job = "Gun Dealer";
+		ConsoleSystem.Run( "ServerSetJob 2  "  );
+	}
+	void Hobo()
+	{
+		JobUI.Job = "Hobo";
+		ConsoleSystem.Run( "ServerSetJob 3  "  );
+	}
+	void Hitman()
+	{
+		JobUI.Job = "Hitman";
+		ConsoleSystem.Run( "ServerSetJob 4  "  );
+	}
+	void GangLeader()
+	{
+		
+		ConsoleSystem.Run( "ServerSetJob 5  "  );
+		JobUI.Job = "Gang Leader";
+		citizen();
+		gang();
+		
+	}
+void Police()
+	{
+		
+		
+		JobUI.Job = "Police Officer";
+		ConsoleSystem.Run( "ServerSetJob 6 ");
+
+		citizen();
+		police();
+		
+	}
+	
+} 

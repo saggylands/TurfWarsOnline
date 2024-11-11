@@ -1,0 +1,59 @@
+﻿@using System.Threading.Tasks;
+@using System.IO;
+@using System.Collections.Generic;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel;
+<root class="spawnpage columned">
+
+	<div class="nav">
+
+		<div class="section">
+		<h1>Create a Crosshair</h1>
+		</div>
+
+		<div class="section grow">
+		</div>
+
+		<div class="section">
+
+			<SliderControl Value:bind="@CrosshairStuff.FloatValue">Size</SliderControl>
+			<SliderControl Value:bind="@CrosshairStuff.FloatHue">Hue</SliderControl>
+			<SliderControl Value:bind="@CrosshairStuff.FloatSaturation">Saturation</SliderControl>
+			<SliderControl Value:bind="@CrosshairStuff.FloatLightness">Transparency</SliderControl>
+			<SliderControl Value:bind="@CrosshairStuff.FloatRadius">Shape</SliderControl>
+		</div>
+
+	</div>
+
+	<div class="contents">
+
+
+
+	</div>
+
+</root>
+
+<style>
+h1 {
+	font-size: 20px;
+}
+.crosshair
+{
+	position: absolute;
+	z-index: -1;
+	align-items: flex-end;
+	background-color: #fff4;
+	mix-blend-mode: lighten;
+	width: 5px;
+	height: 5px;
+	top: 50%;
+	left: 50%;
+	border-radius: 100px;
+	transform: translate( -50% -50% );
+}
+
+</style>
+@code
+{
+}
